@@ -1,24 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+// @ts-ignore
+import Counter from './components/counter'
 
-const App: React.FC = () => {
+const App: React.FC = (props: any) => {
+  const [title, setTitle] = useState('Primer titulo')
+  // const countdown = useCountdown(() => Date.now() + 10000);
+  useEffect(() => {
+    setTimeout(() => {
+      setTitle('Otro titulo')
+    }, 2500);
+  }, [])
+  console.log({props})
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Counter title={title}></Counter>
+      </div>
+      <div>
+        {JSON.stringify({props})}
+      </div>
     </div>
   );
 }
