@@ -10,14 +10,14 @@ import * as serviceWorker from './serviceWorker';
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 const node = document.createElement("parking-widget");
-node.setAttribute('id', 'parking-widget');
+// node.setAttribute('id', 'parking-widget');
 // @ts-ignore
 document.getElementById('root').appendChild(node);
 
-setTimeout(() => {
-    // @ts-ignore
-    document.getElementById('parking-widget').setAttribute('hola', 'quetal');
-}, 5000)
+// setTimeout(() => {
+//     // @ts-ignore
+//     document.getElementById('parking-widget').setAttribute('hola', 'quetal');
+// }, 5000)
 
 class ParkingWidget extends HTMLElement {
     constructor() {

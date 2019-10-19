@@ -1,26 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-// @ts-ignore
-import Counter from './components/counter'
+import { useToggle } from './utils'
+import VendorAreaHeader from './components/VendorAreaHeader'
+import Feature from './components/Feature'
+import { getParkingData } from './services/apiService'
+import { usePromise } from './utils'
+import { parkingResponseI, parkingSlot } from './models'
 
+
+// TODO: Receive parking slot by props
 const App: React.FC = (props: any) => {
-  const [title, setTitle] = useState('Primer titulo')
-  // const countdown = useCountdown(() => Date.now() + 10000);
-  useEffect(() => {
-    setTimeout(() => {
-      setTitle('Otro titulo')
-    }, 2500);
-  }, [])
-  console.log({props})
+  const [isOpen, toggle] = useToggle(true)
+  const [parking, fetching, error] = usePromise(getParkingData) as [parkingResponseI, boolean, any]
+  
+  if (fetching) return <div>Loading</div>
+  if (error) return <div>Error</div>
+
   return (
-    <div className="App">
-      <div>
-        <Counter title={title}></Counter>
-      </div>
-      <div>
-        {JSON.stringify({props})}
-      </div>
+    <div className="parkingWidget">
+      <VendorAreaHeader 
+        text={`${parking.dictionary.bookYourParking} Milano`} 
+        onClickShowMore={toggle} 
+      />
+      {isOpen &&
+        <div>
+          <div>
+            {parking.dictionary.featuresTitle}
+          </div>
+          <div>
+            <span>
+              <img src={parking.vendor.map}></img>
+            </span>
+            <span>
+              {parking.vendor.features.map((f: string) => <Feature text={f}/>)}
+            </span>
+          </div>
+        </div>
+      }
     </div>
   );
 }
