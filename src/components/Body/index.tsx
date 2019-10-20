@@ -32,7 +32,7 @@ const Body = ({
             </div>
             <div className={cn('body_content', isMobile && 'mobile')}>
                 <div className={cn('body_content_image', isMobile && 'mobile')}>
-                    <img src={image}></img>
+                    <img src={image} alt='map'></img>
                 </div>
                 <div className={cn('body_content_list')}>
                     {list.map((f: string) => <Feature text={f} />)}

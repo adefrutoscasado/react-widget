@@ -6,12 +6,9 @@ import './index.scss';
 import ExampleComponent from './App';
 import * as serviceWorker from './serviceWorker';
 
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-
 const node = document.createElement("parking-widget");
-// @ts-ignore
-document.getElementById('root').appendChild(node);
+const target = document.getElementById('root')
+if (target) target.appendChild(node);
 
 class ParkingWidgetWebWelement extends HTMLElement {
     constructor() {
@@ -34,16 +31,12 @@ class ParkingWidgetWebWelement extends HTMLElement {
         this.observer.disconnect();
     }
 
-    // Diria que esto sobra
     update() {
         this.unmount();
         this.mount();
     }
 
     mount() {
-        // const propTypes = ExampleComponent.propTypes ? ExampleComponent.propTypes : {};
-        // const events = ExampleComponent.propTypes ? ExampleComponent.propTypes : {};
-        console.log(this.attributes)
         const props = {
             ...this.getProps(this.attributes, {}),
             ...this.getEvents({}),
@@ -103,6 +96,7 @@ class ParkingWidgetWebWelement extends HTMLElement {
 }
 
 window.customElements.define('parking-widget', ParkingWidgetWebWelement)
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA

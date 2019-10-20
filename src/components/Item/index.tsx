@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Item = ({
-    id,
+    id = 0,
     data,
     dictionary = {},
 }: Props) => {
@@ -34,7 +34,7 @@ const Item = ({
     const features: string[] = [spaceLiteral, insuranceLiteral]
 
     return (
-        <div className={cn('catalog_item', isMobile && 'mobile')}>
+        <div key={id.toString()} className={cn('catalog_item', isMobile && 'mobile')}>
             <div>
                 <ul>
                     {features.map((f: string) => <li>{f}</li>)}
