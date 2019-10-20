@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 // @ts-ignore
 import { Parser } from 'html-to-react';
 import './index.scss';
-import ExampleComponent from './App';
+import Component from './App';
 import * as serviceWorker from './serviceWorker';
 
 const node = document.createElement("parking-widget");
@@ -42,7 +42,7 @@ class ParkingWidgetWebWelement extends HTMLElement {
             ...this.getEvents({}),
             children: this.parseHtmlToReact(this.innerHTML)
         };
-        render(<ExampleComponent {...props} />, this);
+        render(<Component {...props} />, this);
     }
 
     unmount() {

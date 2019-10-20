@@ -50,11 +50,13 @@ monitorEvents(window, "onBookItem")
 The app is using Husky for this purpose. Before every commit, a hook is executed in order to check that all tests end successfully (`package.json`):
 
 ```json
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test"
+{
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm test"
+        }
     }
-  }
+}
 ```
 
 - How do you differentiate between desktop and mobile devices?
@@ -74,7 +76,7 @@ const Component = () => {
 }
 ```
 
-This provides a boolean that is automatically updated in fucntion of the size of the screen. Also, the query media that defines the device could be easily cahnges without the need of recompiling:
+This provides a boolean that is automatically updated in function of the size of the screen. Also, the query media that defines the device could be easily changed without the need of recompiling:
 
 ```ts
 export const mobileMedia = window.mobileMediaQuery | 'only screen and (max-device-width : 480px)' 
