@@ -20,26 +20,33 @@ const App = ({
 }: Props) => {
   const [isOpen, toggle] = useToggle(true)
   const [parking, fetching, error] = usePromise(getParkingData) as [parkingResponseI, boolean, any]
-  
-  if (fetching) return <div>Loading</div>
-  if (error) return <div>Error</div>
+  const loaded = !fetching && !error
 
   return (
     <div className={cn('card')}>
-      <Header
-        text={`${parking.dictionary.bookYourParking} ${city}`} 
-        onClickShowMore={toggle}
-        isOpen={isOpen}
-      />
-      {isOpen && (
-        <Body
-          title = {parking.dictionary.featuresTitle}
-          list = {parking.vendor.features}
-          image = {parking.vendor.map}
-          items = {parking.parkings}
-          dictionary = {parking.dictionary}
+      {fetching &&
+        <div className={cn('center')}>Loading</div>
+      }
+      {error &&
+        <div className={cn('center')}>There was an error trying to retrieve data</div>
+      }
+      {loaded && <>
+        <Header
+          text={`${parking.dictionary.bookYourParking} ${city}`} 
+          onClickShowMore={toggle}
+          isOpen={isOpen}
         />
-      )}
+        {isOpen && (
+          <Body
+            title = {parking.dictionary.featuresTitle}
+            list = {parking.vendor.features}
+            image = {parking.vendor.map}
+            items = {parking.parkings}
+            dictionary = {parking.dictionary}
+          />
+        )
+        }
+      </>}
     </div>
   );
 }

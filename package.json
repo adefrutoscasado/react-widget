@@ -42,5 +42,10 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   }
 }
