@@ -1,0 +1,114 @@
+$brandColor: rgb(205, 92, 88);
+$shadowColor: #bebebe;
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.brandColor {
+  color: $brandColor;
+}
+
+.card {
+  background-color: white;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px; // remove this
+  box-shadow: 1px 4px 4px $shadowColor;
+  &_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  &_title {
+    background-color: white;
+    margin-bottom: 10px;
+  }
+  &_content {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    &.mobile {
+      flex-direction: column;
+    }
+    &_image {
+      margin-right: 10px;
+      max-width: 50%;
+      &.mobile {
+        max-width: 100%;
+      }
+      > img {
+        width:100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.catalog {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  &.mobile {
+    flex-direction: column;
+  }
+  &_item {
+    margin: 10px;
+    align-self: center;
+    min-width: 200px;
+    border: 1px solid #bebebe;
+    border-radius: 5px;
+    &.mobile {
+      margin: 0px;
+      margin-bottom: 10px;
+      width: 100%;
+      align-self: center;
+    }
+  }
+}
+
+.button {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid $brandColor;
+  border-radius: 0.6em;
+  color: $brandColor;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  &:hover,
+  &:focus {
+    color: #fff;
+    outline: 0;
+  }
+  &.first {
+    transition: box-shadow 0ms ease-in-out, color 0ms ease-in-out;
+    &:hover {
+      box-shadow: 0 0 40px 40px $brandColor inset;
+    }
+  }
+}

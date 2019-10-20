@@ -1,15 +1,23 @@
 import React from 'react';
-import './App.css';
+
 import { useToggle } from './utils'
-import VendorAreaHeader from './components/VendorAreaHeader'
-import Feature from './components/Feature'
+import Header from './components/Header'
+import Body from './components/Body'
 import { getParkingData } from './services/apiService'
 import { usePromise } from './utils'
-import { parkingResponseI, parkingSlot } from './models'
+import { parkingResponseI } from './models'
+import './App.scss'
+import cn from 'classnames'
 
+interface Props {
+  parkingId?: string
+  city?: string
+}
 
-// TODO: Receive parking slot by props
-const App: React.FC = (props: any) => {
+const App = ({
+  parkingId = '',
+  city = ''
+}: Props) => {
   const [isOpen, toggle] = useToggle(true)
   const [parking, fetching, error] = usePromise(getParkingData) as [parkingResponseI, boolean, any]
   
@@ -17,26 +25,21 @@ const App: React.FC = (props: any) => {
   if (error) return <div>Error</div>
 
   return (
-    <div className="parkingWidget">
-      <VendorAreaHeader 
-        text={`${parking.dictionary.bookYourParking} Milano`} 
-        onClickShowMore={toggle} 
+    <div className={cn('card')}>
+      <Header
+        text={`${parking.dictionary.bookYourParking} ${city}`} 
+        onClickShowMore={toggle}
+        isOpen={isOpen}
       />
-      {isOpen &&
-        <div>
-          <div>
-            {parking.dictionary.featuresTitle}
-          </div>
-          <div>
-            <span>
-              <img src={parking.vendor.map}></img>
-            </span>
-            <span>
-              {parking.vendor.features.map((f: string) => <Feature text={f}/>)}
-            </span>
-          </div>
-        </div>
-      }
+      {isOpen && (
+        <Body
+          title = {parking.dictionary.featuresTitle}
+          list = {parking.vendor.features}
+          image = {parking.vendor.map}
+          items = {parking.parkings}
+          dictionary = {parking.dictionary}
+        />
+      )}
     </div>
   );
 }

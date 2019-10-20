@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from './tick.svg'
+import cn from 'classnames'
 
 interface Props {
     text?: string;
@@ -10,11 +11,11 @@ const Feature = ({
 }: Props) => {
     
     return (
-        <div key={text}>
-            <span>
+        <div key={text} className={cn('feature')}>
+            <span className={cn('feature_icon')}>
                 <img src={logo} alt="tick" />
             </span>
-            <span>
+            <span className={cn('feature_text')}>
                 {text}
             </span>
         </div>

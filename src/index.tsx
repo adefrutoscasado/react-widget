@@ -1,25 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { render, unmountComponentAtNode } from 'react-dom';
 // @ts-ignore
 import { Parser } from 'html-to-react';
-import './index.css';
+import './index.scss';
 import ExampleComponent from './App';
 import * as serviceWorker from './serviceWorker';
+
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 const node = document.createElement("parking-widget");
-// node.setAttribute('id', 'parking-widget');
 // @ts-ignore
 document.getElementById('root').appendChild(node);
 
-// setTimeout(() => {
-//     // @ts-ignore
-//     document.getElementById('parking-widget').setAttribute('hola', 'quetal');
-// }, 5000)
-
-class ParkingWidget extends HTMLElement {
+class ParkingWidgetWebWelement extends HTMLElement {
     constructor() {
         super();
         // @ts-ignore
@@ -47,12 +41,12 @@ class ParkingWidget extends HTMLElement {
     }
 
     mount() {
-        const propTypes = ExampleComponent.propTypes ? ExampleComponent.propTypes : {};
-        const events = ExampleComponent.propTypes ? ExampleComponent.propTypes : {};
+        // const propTypes = ExampleComponent.propTypes ? ExampleComponent.propTypes : {};
+        // const events = ExampleComponent.propTypes ? ExampleComponent.propTypes : {};
         console.log(this.attributes)
         const props = {
-            ...this.getProps(this.attributes, propTypes),
-            ...this.getEvents(events),
+            ...this.getProps(this.attributes, {}),
+            ...this.getEvents({}),
             children: this.parseHtmlToReact(this.innerHTML)
         };
         render(<ExampleComponent {...props} />, this);
@@ -108,7 +102,7 @@ class ParkingWidget extends HTMLElement {
     }
 }
 
-window.customElements.define('parking-widget', ParkingWidget)
+window.customElements.define('parking-widget', ParkingWidgetWebWelement)
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
