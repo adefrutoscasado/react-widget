@@ -1,4 +1,6 @@
+## React widget
 
+This project consists in creating a React widget and wrapping it into a native web component, in order to be cross-framework compatible.
 
 - How can you initialize and render the widget in the Web page? 
 
